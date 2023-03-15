@@ -179,10 +179,6 @@ function removeTaskFromLocalStorage(taskElement) {
 function editTaskInLocalStorage(taskElement , newName) {
     
     let tasks;
-    // console.log(taskElement);
-    // console.log(newName);
-    // let index = taskElement.dataset.number;
-    // console.log(index);
 
     if (localStorage.getItem('tasks') !== null) {
         tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -191,25 +187,17 @@ function editTaskInLocalStorage(taskElement , newName) {
     }
 
     let index = tasks.indexOf(taskElement);
-    console.log(index);
-    console.log(tasks.length);
 
-    // let updatedTasks = tasks.map((task, i, tasks) => {
-    //     if (i = index) {
-    //         task = newName;
-    //         return task;
-    //     } else {
-    //         return task
-    //     }
-    // })
-
-    for (let i = 0; i < 2; i++) {
-        if (i = index) {
-            tasks[i] = newName;
+    let updatedTasks = tasks.map((task) => {
+        let i = tasks.indexOf(task);
+        if (i === index) {
+            return task = newName;
+        } else {
+            return task
         }
-    }
+    })
 
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
 }
 
 // видалити всі таски
