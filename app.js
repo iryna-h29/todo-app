@@ -146,9 +146,10 @@ function deleteOrEditTask(event) {
     }
     if (event.target.classList.contains('edit-task-btn')) {
         let newNameTask = prompt("Введіть нову назву завдання:");
+        let replacedName = event.target.parentElement.parentElement.childNodes[0].textContent;
         event.target.parentElement.parentElement.childNodes[0].textContent = newNameTask;
 
-        editTaskInLocalStorage(event.target.parentElement.parentElement, newNameTask);
+        editTaskInLocalStorage(replacedName, newNameTask);
     }
 }
 
@@ -178,22 +179,37 @@ function removeTaskFromLocalStorage(taskElement) {
 function editTaskInLocalStorage(taskElement , newName) {
     
     let tasks;
-    let index = taskElement.dataset.number;
+    // console.log(taskElement);
+    // console.log(newName);
+    // let index = taskElement.dataset.number;
+    // console.log(index);
 
     if (localStorage.getItem('tasks') !== null) {
         tasks = JSON.parse(localStorage.getItem('tasks'));
     } else {
         tasks = []
     }
-    
-    for (let i = 0; i < tasks.length; i++) {
+
+    let index = tasks.indexOf(taskElement);
+    console.log(index);
+    console.log(tasks.length);
+
+    // let updatedTasks = tasks.map((task, i, tasks) => {
+    //     if (i = index) {
+    //         task = newName;
+    //         return task;
+    //     } else {
+    //         return task
+    //     }
+    // })
+
+    for (let i = 0; i < 2; i++) {
         if (i = index) {
             tasks[i] = newName;
         }
     }
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
-
 }
 
 // видалити всі таски
